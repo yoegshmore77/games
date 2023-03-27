@@ -12,6 +12,9 @@ let gameHeight = maxImageHeight * 3.5;
 let totalPairs = 6;
 let game_over_screen;
 
+let score = 0;
+let scoreText;
+
 window.onload = function() {
 	// the largest image is the cardBack 
 	// 		256x320 - large enough to hold our animals
@@ -69,6 +72,72 @@ class BootScene extends Phaser.Scene {
 		// I got these clips from http://opengameart.com
 		this.load.audio('yay', 'assets/sounds/round_end.wav');
 		this.load.audio('awe', 'assets/sounds/death.wav');
+
+
+		//----preloader-----
+
+		/*var progressBar = this.add.graphics();
+            var progressBox = this.add.graphics();
+            progressBox.fillStyle(0x222222, 0.8);
+            progressBox.fillRect(240, 270, 320, 50);
+            
+            var width = this.cameras.main.width;
+            var height = this.cameras.main.height;
+            var loadingText = this.make.text({
+                x: width / 2,
+                y: height / 2 - 50,
+                text: 'Loading...',
+                style: {
+                    font: '20px monospace',
+                    fill: '#ffffff'
+                }
+            });
+            loadingText.setOrigin(0.5, 0.5);
+            
+            var percentText = this.make.text({
+                x: width / 2,
+                y: height / 2 - 5,
+                text: '0%',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
+            });
+            percentText.setOrigin(0.5, 0.5);
+            
+            var assetText = this.make.text({
+                x: width / 2,
+                y: height / 2 + 50,
+                text: '',
+                style: {
+                    font: '18px monospace',
+                    fill: '#ffffff'
+                }
+            });
+            assetText.setOrigin(0.5, 0.5);
+            
+            this.load.on('progress', function (value) {
+                percentText.setText(parseInt(value * 100) + '%');
+                progressBar.clear();
+                progressBar.fillStyle(0xffffff, 1);
+                progressBar.fillRect(250, 280, 300 * value, 30);
+            });
+            
+            this.load.on('fileprogress', function (file) {
+                assetText.setText('Loading asset: ' + file.key);
+            });
+            this.load.on('complete', function () {
+                progressBar.destroy();
+                progressBox.destroy();
+                loadingText.destroy();
+                percentText.destroy();
+                assetText.destroy();
+                //alert("loading completed")
+            });*/
+
+
+
+		//------------------
 	}
 
 	create() {
@@ -93,7 +162,8 @@ class PlayGameScene extends Phaser.Scene {
 		this.add.image(x, y, 'header');
 
 		
-
+		//score
+		scoreText = this.add.text(12, 45, 'Score: 0', { fontSize: '16px', fill: '#000' });
 
 		// I am only loading 4 of the animals :)
 		//let animalArray = ['cat', 'chick', 'pig', 'rabbit', 'cat', 'chick'];
@@ -192,8 +262,8 @@ class PlayGameScene extends Phaser.Scene {
 		// create a function to handle our mouseClick or touch events
 		this.input.on('pointerdown', this.handleMouseDown, this);
 
-		this.yaySound = this.sound.add('yay', { volume: 0.5, });
-		this.aweSound = this.sound.add('awe');
+		this.yaySound = this.sound.add('yay', { volume: 0.2, });
+		this.aweSound = this.sound.add('awe',{ volume: 0.5, });
 	}
 
 	handleMouseDown(mousePointer) {
@@ -248,8 +318,13 @@ class PlayGameScene extends Phaser.Scene {
 				this.chosenCards.length = 0;
 				this.numMatches++;
 				this.canMove = true;
+
+				score += 100;
+    			scoreText.setText('Score: ' + score);
 			} else {
 				// no match
+				score -= 10;
+    			scoreText.setText('Score: ' + score);
 				this.aweSound.play();
 
 				this.time.addEvent({
