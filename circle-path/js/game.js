@@ -8,7 +8,30 @@ var bgColors = [0x62bd18, 0xffbb00, 0xff5300, 0xd21034, 0xff475c, 0x8f16b2];
 
 
 window.onload = function () {
-  game = new Phaser.Game(640, 960, Phaser.AUTO, "");
+  
+      // game configuration object
+    var gameConfig = {
+
+        // render type
+       type: Phaser.CANVAS,
+
+       // game width, in pixels
+       width: 750,
+
+       // game height, in pixels
+       height: 1334,
+
+       // game background color
+       backgroundColor: 0x444444,
+
+       // scenes used by the game
+       scene: [playGame]
+    };
+
+    // game constructor
+    game = new Phaser.Game(gameConfig);
+
+  //game = new Phaser.Game(640, 960, Phaser.AUTO, "");
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
 }
