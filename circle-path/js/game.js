@@ -49,6 +49,8 @@ playGame.prototype = {
   },
   create: function () {
 
+    this.resize();
+
     this.savedData = localStorage.getItem("circlepath") == null ? {
       score: 0
     } : JSON.parse(localStorage.getItem("circlepath"));
@@ -99,7 +101,7 @@ playGame.prototype = {
       this.addTarget();
     }
 
-    this.resize();
+    
 
   },
   update: function () {
