@@ -181,6 +181,7 @@ playGame.prototype = {
 
   // pure javascript to scale the game
   resize: function() {
+    alert("hi");
     var canvas = document.querySelector("canvas");
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
