@@ -20,8 +20,8 @@ playGame.prototype = {
     game.load.image("ball", "assets/ball.png");
     game.load.image("target", "assets/target.png");
     game.load.image("arm", "assets/arm.png");
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
+    //game.scale.pageAlignHorizontally = true;
+    //game.scale.pageAlignVertically = true;
     //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   },
   create: function () {
