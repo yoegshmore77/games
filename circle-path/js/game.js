@@ -36,7 +36,8 @@ window.onload = function () {
     //resize();
     //window.addEventListener("resize", this.resize, false);
 
-  game = new Phaser.Game(640, 960, Phaser.AUTO, "");
+  //game = new Phaser.Game(640, 960, Phaser.AUTO, "");
+  game = new Phaser.Game(750, 1334, Phaser.AUTO, "");
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
 }
