@@ -40,6 +40,7 @@ window.onload = function () {
   game = new Phaser.Game(750, 1334, Phaser.AUTO, "");
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
+  resize1();
 }
 
 var playGame = function (game) {};
@@ -108,7 +109,7 @@ playGame.prototype = {
     }
 
     //this.resize();
-    resize1();
+    
     
 
   },
@@ -210,7 +211,7 @@ playGame.prototype = {
 
 // pure javascript to scale the game
 function resize1() {
-  alert("called");
+  alert("called---");
     var canvas = document.querySelector("canvas");
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
