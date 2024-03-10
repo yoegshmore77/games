@@ -41,6 +41,7 @@ window.onload = function () {
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
   resize1();
+  window.addEventListener("resize", resize, false);
 }
 
 var playGame = function (game) {};
@@ -211,7 +212,7 @@ playGame.prototype = {
 
 // pure javascript to scale the game
 function resize1() {
-  alert("called---");
+  alert("called---1");
     var canvas = document.querySelector("canvas");
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
