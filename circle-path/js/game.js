@@ -107,7 +107,7 @@ playGame.prototype = {
     }
 
     //this.resize();
-    //resize1();
+    resize1();
     
 
   },
