@@ -29,7 +29,7 @@ window.onload = function () {
     };
 
     // game constructor
-    //game = new Phaser.Game(gameConfig);
+    game = new Phaser.Game(gameConfig);
 
         // pure javascript to give focus to the page/frame and scale the game
     //window.focus()
@@ -37,7 +37,7 @@ window.onload = function () {
     //window.addEventListener("resize", this.resize, false);
 
   //game = new Phaser.Game(640, 960, Phaser.AUTO, "");
-  game = new Phaser.Game(750, 1334, Phaser.AUTO, "");
+  //game = new Phaser.Game(750, 1334, Phaser.AUTO, "");
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
   resize1();
@@ -212,7 +212,7 @@ playGame.prototype = {
 
 // pure javascript to scale the game
 function resize1() {
-  alert("called---2");
+  alert("called---3");
     var canvas = document.querySelector("canvas");
     var windowWidth = window.innerWidth;
     var windowHeight = window.innerHeight;
