@@ -29,9 +29,14 @@ window.onload = function () {
     };
 
     // game constructor
-    game = new Phaser.Game(gameConfig);
+    //game = new Phaser.Game(gameConfig);
 
-  //game = new Phaser.Game(640, 960, Phaser.AUTO, "");
+        // pure javascript to give focus to the page/frame and scale the game
+    //window.focus()
+    //resize();
+    //window.addEventListener("resize", this.resize, false);
+
+  game = new Phaser.Game(640, 960, Phaser.AUTO, "");
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
 }
@@ -43,13 +48,13 @@ playGame.prototype = {
     game.load.image("ball", "assets/ball.png");
     game.load.image("target", "assets/target.png");
     game.load.image("arm", "assets/arm.png");
-    //game.scale.pageAlignHorizontally = true;
-    //game.scale.pageAlignVertically = true;
-    //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   },
   create: function () {
 
-    this.resize();
+    
 
     this.savedData = localStorage.getItem("circlepath") == null ? {
       score: 0
@@ -101,6 +106,7 @@ playGame.prototype = {
       this.addTarget();
     }
 
+    this.resize();
     
 
   },
