@@ -8,40 +8,9 @@ var bgColors = [0x62bd18, 0xffbb00, 0xff5300, 0xd21034, 0xff475c, 0x8f16b2];
 
 
 window.onload = function () {
-  
-      // game configuration object
-    var gameConfig = {
-
-        // render type
-       type: Phaser.CANVAS,
-
-       // game width, in pixels
-       width: 750,
-
-       // game height, in pixels
-       height: 1334,
-
-       // game background color
-       backgroundColor: 0x444444,
-
-       // scenes used by the game
-       scene: [playGame]
-    };
-
-    // game constructor
-    game = new Phaser.Game(gameConfig);
-
-        // pure javascript to give focus to the page/frame and scale the game
-    //window.focus()
-    //resize();
-    //window.addEventListener("resize", this.resize, false);
-
-  //game = new Phaser.Game(640, 960, Phaser.AUTO, "");
-  //game = new Phaser.Game(750, 1334, Phaser.AUTO, "");
+  game = new Phaser.Game(640, 960, Phaser.AUTO, "");
   game.state.add("PlayGame", playGame);
   game.state.start("PlayGame");
-  resize1();
-  window.addEventListener("resize", resize1, false);
 }
 
 var playGame = function (game) {};
@@ -56,9 +25,6 @@ playGame.prototype = {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
   },
   create: function () {
-
-    
-
     this.savedData = localStorage.getItem("circlepath") == null ? {
       score: 0
     } : JSON.parse(localStorage.getItem("circlepath"));
@@ -108,10 +74,6 @@ playGame.prototype = {
     for (var i = 0; i < visibleTargets; i++) {
       this.addTarget();
     }
-
-    //this.resize();
-    
-    
 
   },
   update: function () {
@@ -189,41 +151,5 @@ playGame.prototype = {
     gameOverTween.onComplete.add(function () {
       game.state.start("PlayGame");
     }, this)
-  },
-
-  // pure javascript to scale the game
-  resize: function() {
-    alert("hi");
-    var canvas = document.querySelector("canvas");
-    var windowWidth = window.innerWidth;
-    var windowHeight = window.innerHeight;
-    var windowRatio = windowWidth / windowHeight;
-    var gameRatio = game.config.width / game.config.height;
-    if(windowRatio < gameRatio){
-        canvas.style.width = windowWidth + "px";
-        canvas.style.height = (windowWidth / gameRatio) + "px";
-    }
-    else{
-        canvas.style.width = (windowHeight * gameRatio) + "px";
-        canvas.style.height = windowHeight + "px";
-    }
-}
-}
-
-// pure javascript to scale the game
-function resize1() {
-  alert("called---3");
-    var canvas = document.querySelector("canvas");
-    var windowWidth = window.innerWidth;
-    var windowHeight = window.innerHeight;
-    var windowRatio = windowWidth / windowHeight;
-    var gameRatio = game.config.width / game.config.height;
-    if(windowRatio < gameRatio){
-        canvas.style.width = windowWidth + "px";
-        canvas.style.height = (windowWidth / gameRatio) + "px";
-    }
-    else{
-        canvas.style.width = (windowHeight * gameRatio) + "px";
-        canvas.style.height = windowHeight + "px";
-    }
+  }
 }
