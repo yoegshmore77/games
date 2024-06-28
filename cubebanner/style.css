@@ -9,10 +9,10 @@ body {
   font-weight: 300; }
 
 #wrapper {
-  /*padding-top: 10%; */
+  padding-top: 20%;
 
 
-    position: absolute;
+      position: absolute;
     left: 50%;
     top: 50%;
     /* The following will size the video to fit the full container. Not necessary, just nice.*/
@@ -23,6 +23,7 @@ body {
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
     z-index: 0;
+
 
     
 }
@@ -52,7 +53,6 @@ body {
         
 
 
-
         
 
 
@@ -62,7 +62,8 @@ body {
 
 .cube {
   
-  
+
+
 
   margin: 0 auto;
   height: 400px;
@@ -77,6 +78,7 @@ body {
   -ms-transform: rotateX(136deg) rotateY(1122deg);
   -o-transform: rotateX(136deg) rotateY(1122deg);
   transform: rotateX(136deg) rotateY(1122deg);
+
 
 
 
