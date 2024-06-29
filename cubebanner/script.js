@@ -115,7 +115,7 @@ function Viewport(data) {
   this.mouseY = 0;
   this.distanceX = 0;
   this.distanceY = 0;
-  this.positionX = 0;//1122;
+  this.positionX = 40;//1122;
   this.positionY = 0;//180;//136;
   this.torqueX = 0;
   this.torqueY = 0;
@@ -129,17 +129,25 @@ function Viewport(data) {
   this.currentSide = 0;
   this.calculatedSide = 0;
 
+  this.mUp = false;
+  this.delay = 0;
+
 
   bindEvent(document, 'mousedown', function() {
     self.down = true;
+    self.mUp = false;
   });
 
   bindEvent(document, 'mouseup', function() {
     self.down = false;
+    self.mUp = true;
+
+
   });
   
   bindEvent(document, 'keyup', function() {
     self.down = false;
+    self.mUp = false;
   });
 
   bindEvent(document, 'mousemove', function(e) {
@@ -180,6 +188,9 @@ function Viewport(data) {
 
 }
 events.implement(Viewport);
+var counter = 0;
+var flag = 0;
+this.shift = 0;
 Viewport.prototype.animate = function() {
 
   this.distanceX = (this.mouseX - this.lastX);
@@ -188,9 +199,78 @@ Viewport.prototype.animate = function() {
   this.lastX = this.mouseX;
   this.lastY = this.mouseY;
 
+  
+
   if(this.down) {
-    this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
+    flag = 1;
+    this.torqueX = this.torqueX  + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
     this.torqueY = 0;//this.torqueY * this.sensivityFade + (this.distanceY * this.speed - this.torqueY) * this.sensivity;
+
+      //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
+      //console.log('X = '+ this.positionX + ' currentSide = '+ this.currentSide + ' calculatedSide = '+ this.calculatedSide);
+  }
+  else{
+    if(flag == 0){
+    counter++;
+    /*if(counter<=43){
+      this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
+    }
+    else if(counter>=43 && counter<=120){
+      this.torqueX = this.torqueX * this.sensivityFade + (0 * this.speed - this.torqueX) * this.sensivity;
+    }else{
+      this.torqueX = this.torqueX * this.sensivityFade + (-1.5 * this.speed - this.torqueX) * this.sensivity;
+    }
+    if(counter>=200){
+      counter = 0;
+    }*/
+
+    if(counter<=80){
+      //this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
+    }else{
+      //this.torqueX = this.torqueX * this.sensivityFade + (-1.5 * this.speed - this.torqueX) * this.sensivity;
+    }
+    if(counter>=160){
+      counter =0;
+    }
+  }else{
+
+    //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 360 + 'deg) rotateY(' + 0 + 'deg)';    
+    //console.log("called");
+
+        if(this.currentSide == 2){
+
+      this.positionX = 0;
+      this.shift = 0;
+
+    }else if(this.currentSide == 3){
+
+       this.positionX = 270;
+       this.shift = 270;
+
+    }else if(this.currentSide == 4){
+
+       this.positionX = 180;
+       this.shift = 180;
+
+    }else if(this.currentSide == 5){
+
+       this.positionX = 90;
+       this.shift = 90;
+
+    }
+
+
+      //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
+      //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + shift + 'deg)';
+      //this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
+      this.torqueY = 0;
+      //console.log('X = '+ this.positionX + 'currentSide = '+ this.currentSide + 'calculatedSide = '+ this.calculatedSide);
+      //this.currentSide = 0;
+      //this.calculatedSide = 0;
+  }
+
+
+
   }
 
   if(Math.abs(this.torqueX) > 1.0 || Math.abs(this.torqueY) > 1.0) {
@@ -270,7 +350,30 @@ Viewport.prototype.animate = function() {
 
   }
 
-  this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
+
+  //this.delay  = (this.delay * this.sensivityFade + (this.positionX * this.speed - this.delay) * this.sensivity);
+  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
+  
+if(this.down){
+  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
+
+  this.delay  = (this.delay  + (this.positionX * this.speed - this.delay) * this.sensivity*0.1);
+  this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
+}else{
+  //this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
+  //this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
+  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
+
+  this.delay  = (this.delay  + (this.positionX * this.speed - this.delay) * this.sensivity*0.1);
+  this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
+
+  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
+  //console.log(this.positionX +'== delay '+this.delay+' shift = '+ this.shift);
+
+  //transition-delay: 3s;
+}
+
+  //console.log('X ='+ this.positionX);
 
   if(this.positionY != this.previousPositionY || this.positionX != this.previousPositionX) {
     this.previousPositionY = this.positionY;
