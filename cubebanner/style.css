@@ -11,7 +11,7 @@ body {
 #wrapper {
     padding-top: 30%;
     position: absolute;
-    left: 50%;
+    left: 60%;
     top: 50%;
     /* The following will size the video to fit the full container. Not necessary, just nice.*/
     min-width: 100%;
