@@ -116,7 +116,7 @@ function Viewport(data) {
   this.distanceX = 0;
   this.distanceY = 0;
   this.positionX = 40;//1122;
-  this.positionY = 0;//180;//136;
+  this.positionY = 0;//136;
   this.torqueX = 0;
   this.torqueY = 0;
 
@@ -129,25 +129,26 @@ function Viewport(data) {
   this.currentSide = 0;
   this.calculatedSide = 0;
 
-  this.mUp = false;
+  this.shift = 0;
   this.delay = 0;
+
+  this.sideNumber = 0;
+
+  
 
 
   bindEvent(document, 'mousedown', function() {
     self.down = true;
-    self.mUp = false;
+
+
   });
 
   bindEvent(document, 'mouseup', function() {
     self.down = false;
-    self.mUp = true;
-
-
   });
   
   bindEvent(document, 'keyup', function() {
     self.down = false;
-    self.mUp = false;
   });
 
   bindEvent(document, 'mousemove', function(e) {
@@ -188,92 +189,95 @@ function Viewport(data) {
 
 }
 events.implement(Viewport);
-var counter = 0;
-var flag = 0;
-this.shift = 0;
 Viewport.prototype.animate = function() {
 
+  //console.log(this.down);
+
+  //this.element.style[userPrefix.js + 'Transition'] = '200ms';
+
+  
   this.distanceX = (this.mouseX - this.lastX);
   this.distanceY = (this.mouseY - this.lastY);
 
   this.lastX = this.mouseX;
   this.lastY = this.mouseY;
 
-  
-
   if(this.down) {
-    flag = 1;
-    this.torqueX = this.torqueX  + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
+    this.element.style[userPrefix.js + 'Transition'] = 'none';
+    this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
     this.torqueY = 0;//this.torqueY * this.sensivityFade + (this.distanceY * this.speed - this.torqueY) * this.sensivity;
 
-      //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
-      //console.log('X = '+ this.positionX + ' currentSide = '+ this.currentSide + ' calculatedSide = '+ this.calculatedSide);
-  }
-  else{
-    if(flag == 0){
-    counter++;
-    /*if(counter<=43){
-      this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
-    }
-    else if(counter>=43 && counter<=120){
-      this.torqueX = this.torqueX * this.sensivityFade + (0 * this.speed - this.torqueX) * this.sensivity;
-    }else{
-      this.torqueX = this.torqueX * this.sensivityFade + (-1.5 * this.speed - this.torqueX) * this.sensivity;
-    }
-    if(counter>=200){
-      counter = 0;
-    }*/
 
-    if(counter<=80){
-      //this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
-    }else{
-      //this.torqueX = this.torqueX * this.sensivityFade + (-1.5 * this.speed - this.torqueX) * this.sensivity;
-    }
-    if(counter>=160){
-      counter =0;
-    }
+
+
+        if(this.positionX >= 42 && this.positionX <= 130) {
+          this.calculatedSide = 5;
+          this.sideNumber = 5;
+        } else if(this.positionX >= 131 && this.positionX <= 223) {
+          this.calculatedSide = 4;
+          this.sideNumber = 4;
+        } else if(this.positionX >= 224 && this.positionX <= 314) {
+          this.calculatedSide = 3;
+          this.sideNumber = 3;
+        }else if(this.positionX >= 315  && this.positionX < 360){
+           this.calculatedSide = 1;
+           this.sideNumber = 2;
+           //this.positionX = 350;
+           //this.shift = 0;
+           //this.calculatedSide = 2;
+        } else {
+          this.calculatedSide = 2;
+          this.sideNumber = 2;
+        } 
+
+    //if(this.calculatedSide !== this.currentSide) {
+      this.currentSide = this.calculatedSide;
+      this.emit('sideChange');
+    //}
+
+
   }else{
 
-    //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 360 + 'deg) rotateY(' + 0 + 'deg)';    
-    //console.log("called");
+    this.element.style[userPrefix.js + 'Transition'] = '';
+    this.element.style[userPrefix.js + 'Transition'] = 'linear 500ms';
 
-        if(this.currentSide == 2){
+    //--
+    if(this.currentSide == 2){
 
       this.positionX = 0;
       this.shift = 0;
+      this.sideNumber = 2;
 
     }else if(this.currentSide == 3){
 
        this.positionX = 270;
        this.shift = 270;
+       this.sideNumber = 3;
 
     }else if(this.currentSide == 4){
 
        this.positionX = 180;
        this.shift = 180;
+       this.sideNumber = 4;
 
     }else if(this.currentSide == 5){
 
        this.positionX = 90;
        this.shift = 90;
+       this.sideNumber = 5;
+
+    }else if(this.currentSide == 1){
+
+       this.positionX = 359;
+       this.shift = 359;
+       this.sideNumber = 2;
 
     }
-
-
-      //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
-      //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + shift + 'deg)';
-      //this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
-      this.torqueY = 0;
-      //console.log('X = '+ this.positionX + 'currentSide = '+ this.currentSide + 'calculatedSide = '+ this.calculatedSide);
-      //this.currentSide = 0;
-      //this.calculatedSide = 0;
-  }
-
-
+  //--
 
   }
 
-  if(Math.abs(this.torqueX) > 1.0 || Math.abs(this.torqueY) > 1.0) {
+  if(Math.abs(this.torqueX) > 1.0 || Math.abs(this.torqueY) > 1.0){
     if(!this.down) {
       this.torqueX *= this.sensivityFade;
       this.torqueY *= this.sensivityFade;
@@ -291,8 +295,8 @@ Viewport.prototype.animate = function() {
       this.positionX -= this.torqueX;
 
       if(!this.upsideDown) {
-        this.upsideDown = true;
-        this.emit('upsideDown', { upsideDown: this.upsideDown });
+        //this.upsideDown = true;
+        //this.emit('upsideDown', { upsideDown: this.upsideDown });
       }
 
     } else {
@@ -300,28 +304,31 @@ Viewport.prototype.animate = function() {
       this.positionX += this.torqueX;
 
       if(this.upsideDown) {
-        this.upsideDown = false;
-        this.emit('upsideDown', { upsideDown: this.upsideDown });
+        //this.upsideDown = false;
+        //this.emit('upsideDown', { upsideDown: this.upsideDown });
       }
     }
 
     if(this.positionX > 360) {
       this.positionX -= 360;
+      
     } else if(this.positionX < 0) {
       this.positionX += 360;
+      
     }
 
-    if(!(this.positionY >= 46 && this.positionY <= 130) && !(this.positionY >= 220 && this.positionY <= 308)) {
+   /* if(!(this.positionY >= 46 && this.positionY <= 130) && !(this.positionY >= 220 && this.positionY <= 308)) {
       if(this.upsideDown) {
         if(this.positionX >= 42 && this.positionX <= 130) {
-          this.calculatedSide = 3;
+          //this.calculatedSide = 3;
         } else if(this.positionX >= 131 && this.positionX <= 223) {
-          this.calculatedSide = 2;
+          //this.calculatedSide = 2;
         } else if(this.positionX >= 224 && this.positionX <= 314) {
-          this.calculatedSide = 5;
+          //this.calculatedSide = 5;
         } else {
-          this.calculatedSide = 4;
+          //this.calculatedSide = 4;
         }
+       
       } else {
         if(this.positionX >= 42 && this.positionX <= 130) {
           this.calculatedSide = 5;
@@ -329,59 +336,87 @@ Viewport.prototype.animate = function() {
           this.calculatedSide = 4;
         } else if(this.positionX >= 224 && this.positionX <= 314) {
           this.calculatedSide = 3;
-        } else {
+        } else if(this.positionX >= 0 && this.positionX <= 41) {
           this.calculatedSide = 2;
+        } else if(this.positionX >= 315  && this.positionX < 360){
+           //this.calculatedSide = 1;
+           //this.positionX = 360;
+           //this.shift = 360;
+           //this.calculatedSide = 2;
         }
+         
       }
     } else {
       if(this.positionY >= 46 && this.positionY <= 130) {
-        this.calculatedSide = 6;
+        //this.calculatedSide = 6;
       }
 
       if(this.positionY >= 220 && this.positionY <= 308) {
-        this.calculatedSide = 1;
+        //this.calculatedSide = 1;
       }
-    }
+    }*/
 
-    if(this.calculatedSide !== this.currentSide) {
+       /* if(this.positionX >= 42 && this.positionX <= 130) {
+          this.calculatedSide = 5;
+        } else if(this.positionX >= 131 && this.positionX <= 223) {
+          this.calculatedSide = 4;
+        } else if(this.positionX >= 224 && this.positionX <= 314) {
+          this.calculatedSide = 3;
+        }else if(this.positionX >= 315  && this.positionX < 360){
+           this.calculatedSide = 1;
+           //this.positionX = 350;
+           //this.shift = 0;
+           //this.calculatedSide = 2;
+        } else {
+          this.calculatedSide = 2;
+        } 
+
+    //if(this.calculatedSide !== this.currentSide) {
       this.currentSide = this.calculatedSide;
       this.emit('sideChange');
-    }
+    //}*/
+
+
 
   }
 
 
-  //this.delay  = (this.delay * this.sensivityFade + (this.positionX * this.speed - this.delay) * this.sensivity);
-  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
+  //console.log('X= '+ Math.round(this.positionX) + ' currentSide = ' + this.currentSide);
+  //--this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + positionY + 'deg) rotateY(' + this.positionX + 'deg)';
+
+  if(this.down){
+
+    
+
+
+    this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
+    
+    
+  }else{
+
+    //this.delay = (this.shift - this.positionX)/5;
+    //console.log(this.delay);
+    //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
+
+    //transition: transform 500ms ease-in-out;
+
+     //this.element.style[userPrefix.js + 'Transition:'+'Transform'] = '500ms ease-in-out';//'rotateX(' + 0 + 'deg) rotateY(' + this.shift + 'deg)';
+
+
+
+
+    this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.shift + 'deg)';
+    //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
+  }
   
-if(this.down){
-  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
-
-  this.delay  = (this.delay  + (this.positionX * this.speed - this.delay) * this.sensivity*0.1);
-  this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
-}else{
-  //this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
-  //this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
-  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + this.positionY + 'deg) rotateY(' + this.positionX + 'deg)';
-
-  this.delay  = (this.delay  + (this.positionX * this.speed - this.delay) * this.sensivity*0.1);
-  this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
-
-  //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
-  //console.log(this.positionX +'== delay '+this.delay+' shift = '+ this.shift);
-
-  //transition-delay: 3s;
-}
-
-  //console.log('X ='+ this.positionX);
-
-  if(this.positionY != this.previousPositionY || this.positionX != this.previousPositionX) {
+    if(this.positionY != this.previousPositionY || this.positionX != this.previousPositionX) {
     this.previousPositionY = this.positionY;
     this.previousPositionX = this.positionX;
 
     this.emit('rotate');
 
   }
+
 
 }
 var viewport = new Viewport({
@@ -434,9 +469,11 @@ Cube.prototype.sideChange = function() {
 
   for(var i = 0; i < this.sides.length; ++i) {
     this.sides[i].getElementsByClassName('cube-image')[0].className = 'cube-image';    
+    
   }
 
-  this.sides[this.viewport.currentSide - 1].getElementsByClassName('cube-image')[0].className = 'cube-image active';
+  //this.sides[this.viewport.currentSide - 1].getElementsByClassName('cube-image')[0].className = 'cube-image active';
+  this.sides[this.viewport.sideNumber - 1].getElementsByClassName('cube-image')[0].className = 'cube-image active';
 
 }
 
