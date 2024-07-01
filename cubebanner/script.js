@@ -134,6 +134,9 @@ function Viewport(data) {
 
   this.sideNumber = 0;
 
+  this.counter = 0;
+  this.flag = 0;
+
   
 
 
@@ -191,10 +194,6 @@ function Viewport(data) {
 events.implement(Viewport);
 Viewport.prototype.animate = function() {
 
-  //console.log(this.down);
-
-  //this.element.style[userPrefix.js + 'Transition'] = '200ms';
-
   
   this.distanceX = (this.mouseX - this.lastX);
   this.distanceY = (this.mouseY - this.lastY);
@@ -203,11 +202,11 @@ Viewport.prototype.animate = function() {
   this.lastY = this.mouseY;
 
   if(this.down) {
+
+    this.flag = 1;
     this.element.style[userPrefix.js + 'Transition'] = 'none';
     this.torqueX = this.torqueX * this.sensivityFade + (this.distanceX * this.speed - this.torqueX) * this.sensivity;
     this.torqueY = 0;//this.torqueY * this.sensivityFade + (this.distanceY * this.speed - this.torqueY) * this.sensivity;
-
-
 
 
         if(this.positionX >= 42 && this.positionX <= 130) {
@@ -222,9 +221,6 @@ Viewport.prototype.animate = function() {
         }else if(this.positionX >= 315  && this.positionX < 360){
            this.calculatedSide = 1;
            this.sideNumber = 2;
-           //this.positionX = 350;
-           //this.shift = 0;
-           //this.calculatedSide = 2;
         } else {
           this.calculatedSide = 2;
           this.sideNumber = 2;
@@ -235,45 +231,66 @@ Viewport.prototype.animate = function() {
       this.emit('sideChange');
     //}
 
+    this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
+
 
   }else{
 
-    this.element.style[userPrefix.js + 'Transition'] = '';
-    this.element.style[userPrefix.js + 'Transition'] = 'linear 500ms';
 
-    //--
-    if(this.currentSide == 2){
+      if(this.flag == 0){
 
-      this.positionX = 0;
-      this.shift = 0;
-      this.sideNumber = 2;
+              this.counter++;
 
-    }else if(this.currentSide == 3){
+              if(this.counter<=80){
+                this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
+              }else{
+                this.torqueX = this.torqueX * this.sensivityFade + (-1.5 * this.speed - this.torqueX) * this.sensivity;
+              }
+              if(this.counter>=160){
+                this.counter =0;
+              }
+        }else{
 
-       this.positionX = 270;
-       this.shift = 270;
-       this.sideNumber = 3;
+          this.element.style[userPrefix.js + 'Transition'] = '';
+          this.element.style[userPrefix.js + 'Transition'] = 'ease 500ms';
+  
 
-    }else if(this.currentSide == 4){
+        //--
+          if(this.currentSide == 2){
 
-       this.positionX = 180;
-       this.shift = 180;
-       this.sideNumber = 4;
+            this.positionX = 0;
+            this.shift = 0;
+            this.sideNumber = 2;
 
-    }else if(this.currentSide == 5){
+          }else if(this.currentSide == 3){
 
-       this.positionX = 90;
-       this.shift = 90;
-       this.sideNumber = 5;
+             this.positionX = 270;
+             this.shift = 270;
+             this.sideNumber = 3;
 
-    }else if(this.currentSide == 1){
+          }else if(this.currentSide == 4){
 
-       this.positionX = 359;
-       this.shift = 359;
-       this.sideNumber = 2;
+             this.positionX = 180;
+             this.shift = 180;
+             this.sideNumber = 4;
 
-    }
-  //--
+          }else if(this.currentSide == 5){
+
+             this.positionX = 90;
+             this.shift = 90;
+             this.sideNumber = 5;
+
+          }else if(this.currentSide == 1){
+
+             this.positionX = 359;
+             this.shift = 359;
+             this.sideNumber = 2;
+
+          }
+        //--
+
+      }
+    this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
 
   }
 
@@ -294,19 +311,19 @@ Viewport.prototype.animate = function() {
     if(this.positionY > 90 && this.positionY < 270) {
       this.positionX -= this.torqueX;
 
-      if(!this.upsideDown) {
+      //if(!this.upsideDown) {
         //this.upsideDown = true;
         //this.emit('upsideDown', { upsideDown: this.upsideDown });
-      }
+      //}
 
     } else {
 
       this.positionX += this.torqueX;
 
-      if(this.upsideDown) {
+      //if(this.upsideDown) {
         //this.upsideDown = false;
         //this.emit('upsideDown', { upsideDown: this.upsideDown });
-      }
+      //}
     }
 
     if(this.positionX > 360) {
@@ -317,97 +334,10 @@ Viewport.prototype.animate = function() {
       
     }
 
-   /* if(!(this.positionY >= 46 && this.positionY <= 130) && !(this.positionY >= 220 && this.positionY <= 308)) {
-      if(this.upsideDown) {
-        if(this.positionX >= 42 && this.positionX <= 130) {
-          //this.calculatedSide = 3;
-        } else if(this.positionX >= 131 && this.positionX <= 223) {
-          //this.calculatedSide = 2;
-        } else if(this.positionX >= 224 && this.positionX <= 314) {
-          //this.calculatedSide = 5;
-        } else {
-          //this.calculatedSide = 4;
-        }
-       
-      } else {
-        if(this.positionX >= 42 && this.positionX <= 130) {
-          this.calculatedSide = 5;
-        } else if(this.positionX >= 131 && this.positionX <= 223) {
-          this.calculatedSide = 4;
-        } else if(this.positionX >= 224 && this.positionX <= 314) {
-          this.calculatedSide = 3;
-        } else if(this.positionX >= 0 && this.positionX <= 41) {
-          this.calculatedSide = 2;
-        } else if(this.positionX >= 315  && this.positionX < 360){
-           //this.calculatedSide = 1;
-           //this.positionX = 360;
-           //this.shift = 360;
-           //this.calculatedSide = 2;
-        }
-         
-      }
-    } else {
-      if(this.positionY >= 46 && this.positionY <= 130) {
-        //this.calculatedSide = 6;
-      }
-
-      if(this.positionY >= 220 && this.positionY <= 308) {
-        //this.calculatedSide = 1;
-      }
-    }*/
-
-       /* if(this.positionX >= 42 && this.positionX <= 130) {
-          this.calculatedSide = 5;
-        } else if(this.positionX >= 131 && this.positionX <= 223) {
-          this.calculatedSide = 4;
-        } else if(this.positionX >= 224 && this.positionX <= 314) {
-          this.calculatedSide = 3;
-        }else if(this.positionX >= 315  && this.positionX < 360){
-           this.calculatedSide = 1;
-           //this.positionX = 350;
-           //this.shift = 0;
-           //this.calculatedSide = 2;
-        } else {
-          this.calculatedSide = 2;
-        } 
-
-    //if(this.calculatedSide !== this.currentSide) {
-      this.currentSide = this.calculatedSide;
-      this.emit('sideChange');
-    //}*/
-
-
-
+   
   }
 
 
-  //console.log('X= '+ Math.round(this.positionX) + ' currentSide = ' + this.currentSide);
-  //--this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + positionY + 'deg) rotateY(' + this.positionX + 'deg)';
-
-  if(this.down){
-
-    
-
-
-    this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
-    
-    
-  }else{
-
-    //this.delay = (this.shift - this.positionX)/5;
-    //console.log(this.delay);
-    //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.delay + 'deg)';
-
-    //transition: transform 500ms ease-in-out;
-
-     //this.element.style[userPrefix.js + 'Transition:'+'Transform'] = '500ms ease-in-out';//'rotateX(' + 0 + 'deg) rotateY(' + this.shift + 'deg)';
-
-
-
-
-    this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.shift + 'deg)';
-    //this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
-  }
   
     if(this.positionY != this.previousPositionY || this.positionX != this.previousPositionX) {
     this.previousPositionY = this.positionY;
