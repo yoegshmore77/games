@@ -9,10 +9,8 @@ body {
   font-weight: 300; }
 
 #wrapper {
-  padding-top: 20%;
-
-
-      position: absolute;
+    padding-top: 30%;
+    position: absolute;
     left: 50%;
     top: 50%;
     /* The following will size the video to fit the full container. Not necessary, just nice.*/
@@ -24,13 +22,9 @@ body {
     transform: translate(-50%,-50%);
     z-index: 0;
 
-
-    
-}
+  }
 
 .viewport {
-
-
 
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
@@ -46,25 +40,12 @@ body {
   -moz-transform: scale(0.8, 0.8);
   -ms-transform: scale(0.8, 0.8);
   -o-transform: scale(0.8, 0.8);
-  transform: scale(0.8, 0.8);
-  
+  transform: scale(1.8, 1.8);
   /*-webkit-box-reflect: below 170px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0%, transparent), to(rgba(250, 250, 250, 0.1))); */
-
-        
-
-
-        
-
-
-
-        
-}
+  }
 
 .cube {
-  
-
-
-
+  position: relative;
   margin: 0 auto;
   height: 400px;
   width: 400px;
@@ -77,18 +58,7 @@ body {
   -moz-transform: rotateX(136deg) rotateY(1122deg);
   -ms-transform: rotateX(136deg) rotateY(1122deg);
   -o-transform: rotateX(136deg) rotateY(1122deg);
-  transform: rotateX(136deg) rotateY(1122deg);
-
-
-
-
-
-
-
-
-
-
-}
+  transform: rotateX(136deg) rotateY(1122deg); }
 
 .cube > div {
   overflow: hidden;
@@ -106,12 +76,9 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
-  user-select: none; 
+  user-select: none; }
 
 
-
-
-}
 
 .cube > div > div.cube-image {
   width: 400px;
@@ -120,8 +87,8 @@ body {
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-  line-height: 200px;
+  transform: rotate(0deg);
+  line-height: 400px;
   font-size: 80px;
   text-align: center;
   color: #1b9bd8;
@@ -145,9 +112,7 @@ body {
   -ms-transform: rotateX(90deg) translateZ(100px);
   -o-transform: rotateX(90deg) translateZ(100px);
   transform: rotateX(90deg) translateZ(200px);
-  outline: 1px solid transparent; 
-  background-image: url(https://picsum.photos/id/1050/500/500);
-  }
+  outline: 1px solid transparent; }
 
 .cube > div:nth-child(2) {
   -webkit-transform: translateZ(100px);
@@ -156,7 +121,7 @@ body {
   -o-transform: translateZ(100px);
   transform: translateZ(200px);
   outline: 1px solid transparent; 
-  background-image: url(https://picsum.photos/id/1050/500/500);
+  /*background-image: url(https://picsum.photos/id/1050/500/500);*/
   }
 
 .cube > div:nth-child(3) {
