@@ -139,6 +139,8 @@ function Viewport(data) {
 
   document.getElementsByClassName('hand-image')[0].style.transition = 'linear 900ms';
 
+  //document.getElementsByClassName('hand-image')[0].style.transform = 'translateX('+ 1000 +'px)';
+
   
 
 
@@ -166,8 +168,7 @@ function Viewport(data) {
   bindEvent(document, 'mousemove', function(e) {
     self.mouseX = e.pageX;
     self.mouseY = e.pageY;
-    //document.getElementsByClassName('hand-image')[0].style.display = 'none';
-    //document.getElementsByClassName('hand-image')[0].style.transition = 'none';
+
   });
 
   bindEvent(document, 'touchstart', function(e) {
@@ -186,6 +187,7 @@ function Viewport(data) {
   });
 
   bindEvent(document, 'touchmove', function(e) {
+
      document.getElementsByClassName('hand-image')[0].style.display = 'none';
      document.getElementsByClassName('hand-image')[0].style.transition = 'none';
 
@@ -207,7 +209,7 @@ function Viewport(data) {
   bindEvent(document, 'touchend', function(e) {
     self.down = false;
 
-        document.getElementsByClassName('cube')[0].style.transition = '';
+    document.getElementsByClassName('cube')[0].style.transition = '';
     document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
 
   });  
@@ -330,6 +332,7 @@ Viewport.prototype.animate = function() {
       }
     this.element.style[userPrefix.js + 'Transform'] = 'rotateX(' + 0 + 'deg) rotateY(' + this.positionX + 'deg)';
 
+
   }
 
   if(Math.abs(this.torqueX) > 1.0 || Math.abs(this.torqueY) > 1.0){
@@ -437,7 +440,8 @@ Cube.prototype.upsideDown = function(obj) {
 Cube.prototype.sideChange = function() {
 
   for(var i = 0; i < this.sides.length; ++i) {
-    this.sides[i].getElementsByClassName('cube-image')[0].className = 'cube-image';    
+    this.sides[i].getElementsByClassName('cube-image')[0].className = 'cube-image'; 
+    
     
   }
 
