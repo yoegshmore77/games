@@ -81,6 +81,7 @@ body {
     left: 0%;*/
     display: inline-block;
     z-index: 2;
+    user-select: none;
 
 
 }
