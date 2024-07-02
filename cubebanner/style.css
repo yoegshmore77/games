@@ -9,7 +9,7 @@ body {
   font-weight: 300; }
 
 #wrapper {
-    padding-top: 10%;
+    /*padding-top: 10%;*/
     position: absolute;
     left: 50%;
     top: 50%;
@@ -106,7 +106,7 @@ body {
 .cube > div {
   overflow: hidden;
   position: absolute;
-  opacity: 0.9;
+  opacity: 1;
   height: 400px;
   width: 400px;
   background-image: url("https://jordizle.com/static/img/codepen/blank.png");
@@ -140,6 +140,7 @@ body {
   -ms-transition: color 600ms;
   -o-transition: color 600ms;
   transition: color 600ms; }
+
   .cube > div > div.cube-image.active {
     color: red; }
 
@@ -164,16 +165,67 @@ body {
   -o-transform: translateZ(100px);
   transform: translateZ(200px);
   outline: 1px solid transparent; 
-  /*background-image: url(https://picsum.photos/id/1050/500/500);*/
+  background-image: url(https://picsum.photos/id/1050/500/500);
   }
 
+
+video {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.video-wrapper-BG {
+
+ object-fit: cover !important;
+  
+  /*border: 5px solid #556688;*/
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+
+  opacity: 0.3; 
+
+}
+.video-wrapper {
+ 
+  object-fit : none !important;
+  /*border: 32px solid #000;*/
+    top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   z-index: 40;
+
+
+
+
+  
+}
 .cube > div:nth-child(3) {
   -webkit-transform: rotateY(90deg) translateZ(100px);
   -moz-transform: rotateY(90deg) translateZ(100px);
   -ms-transform: rotateY(90deg) translateZ(100px);
   -o-transform: rotateY(90deg) translateZ(100px);
   transform: rotateY(90deg) translateZ(200px);
-  outline: 1px solid transparent; }
+  outline: 1px solid transparent;
+  
+}
 
 .cube > div:nth-child(4) {
   -webkit-transform: rotateY(180deg) translateZ(100px);
@@ -181,7 +233,9 @@ body {
   -ms-transform: rotateY(180deg) translateZ(100px);
   -o-transform: rotateY(180deg) translateZ(100px);
   transform: rotateY(180deg) translateZ(200px);
-  outline: 1px solid transparent; }
+  outline: 1px solid transparent; 
+  background-image: url(https://picsum.photos/id/1043/500/500);
+  }
 
 .cube > div:nth-child(5) {
   -webkit-transform: rotateY(-90deg) translateZ(100px);
@@ -189,7 +243,9 @@ body {
   -ms-transform: rotateY(-90deg) translateZ(100px);
   -o-transform: rotateY(-90deg) translateZ(100px);
   transform: rotateY(-90deg) translateZ(200px);
-  outline: 1px solid transparent; }
+  outline: 1px solid transparent; 
+  background-image: url(https://picsum.photos/id/1022/500/500);
+}
 
 .cube > div:nth-child(6) {
   -webkit-transform: rotateX(-90deg) rotate(180deg) translateZ(100px);
@@ -197,10 +253,14 @@ body {
   -ms-transform: rotateX(-90deg) rotate(180deg) translateZ(100px);
   -o-transform: rotateX(-90deg) rotate(180deg) translateZ(100px);
   transform: rotateX(-90deg) rotate(180deg) translateZ(200px);
-  outline: 1px solid transparent; }
+  outline: 1px solid transparent; 
+  background-image: url(https://picsum.photos/id/1018/500/500);
+  }
 
 object {
-  opacity: 0.5; }
+  /*opacity: 0.5;*/
+   opacity: 1;  
+}
 
 object:hover {
   opacity: 1; }
