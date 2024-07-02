@@ -145,6 +145,10 @@ function Viewport(data) {
   bindEvent(document, 'mousedown', function() {
     self.down = true;
     document.getElementsByClassName('hand-image')[0].style.display = 'none';
+    document.getElementsByClassName('hand-image')[0].style.transition = 'none';
+
+    document.getElementsByClassName('cube')[0].style.transition = '';
+    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
 
 
   });
@@ -153,6 +157,9 @@ function Viewport(data) {
     self.down = false;
     document.getElementsByClassName('hand-image')[0].style.display = 'none';
     document.getElementsByClassName('hand-image')[0].style.transition = 'none';
+
+    document.getElementsByClassName('cube')[0].style.transition = '';
+    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
   });
   
   bindEvent(document, 'keyup', function() {
@@ -163,6 +170,7 @@ function Viewport(data) {
     self.mouseX = e.pageX;
     self.mouseY = e.pageY;
     //document.getElementsByClassName('hand-image')[0].style.display = 'none';
+    //document.getElementsByClassName('hand-image')[0].style.transition = 'none';
   });
 
   bindEvent(document, 'touchstart', function(e) {
@@ -175,11 +183,19 @@ function Viewport(data) {
     self.lastY  = self.mouseY;
 
      document.getElementsByClassName('hand-image')[0].style.display = 'none';
+     document.getElementsByClassName('hand-image')[0].style.transition = 'none';
+
+         document.getElementsByClassName('cube')[0].style.transition = '';
+    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
 
   });
 
   bindEvent(document, 'touchmove', function(e) {
      document.getElementsByClassName('hand-image')[0].style.display = 'none';
+     document.getElementsByClassName('hand-image')[0].style.transition = 'none';
+
+         document.getElementsByClassName('cube')[0].style.transition = '';
+    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
     if(e.preventDefault) { 
       e.preventDefault();
     }
@@ -275,8 +291,8 @@ Viewport.prototype.animate = function() {
 
 
 
-          this.element.style[userPrefix.js + 'Transition'] = '';
-          this.element.style[userPrefix.js + 'Transition'] = 'ease 500ms';
+          //this.element.style[userPrefix.js + 'Transition'] = '';
+          //this.element.style[userPrefix.js + 'Transition'] = 'ease 500ms';
   
 
         //--
