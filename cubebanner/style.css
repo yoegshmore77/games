@@ -21,14 +21,14 @@ body {
     -ms-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 
-      display: flex;
+
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
-    
+    overflow-x: hidden;
 
   }
 
@@ -51,6 +51,40 @@ body {
   transform: scale(1.2, 1.2);
   /*-webkit-box-reflect: below 170px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0%, transparent), to(rgba(250, 250, 250, 0.1))); */
   }
+
+
+
+.hand-image {
+
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(0deg);
+  line-height: 40px;
+  font-size: 40px;
+  text-align: center;
+  color: #1b9bd8;
+  -webkit-transition: color 600ms;
+  -moz-transition: color 600ms;
+  -ms-transition: color 600ms;
+  -o-transition: color 600ms;
+  transition: rotate 1600ms; 
+  
+  justify-content: center;
+
+    /*top: 40%;
+    left: 0%;*/
+    display: inline-block;
+    z-index: 2;
+
+
+}
+
 
 .cube {
   position: relative;
