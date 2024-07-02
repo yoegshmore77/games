@@ -151,6 +151,7 @@ function Viewport(data) {
 
   bindEvent(document, 'mouseup', function() {
     self.down = false;
+    document.getElementsByClassName('hand-image')[0].style.display = 'none';
   });
   
   bindEvent(document, 'keyup', function() {
@@ -160,6 +161,7 @@ function Viewport(data) {
   bindEvent(document, 'mousemove', function(e) {
     self.mouseX = e.pageX;
     self.mouseY = e.pageY;
+    document.getElementsByClassName('hand-image')[0].style.display = 'none';
   });
 
   bindEvent(document, 'touchstart', function(e) {
