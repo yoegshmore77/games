@@ -147,9 +147,6 @@ function Viewport(data) {
     document.getElementsByClassName('hand-image')[0].style.display = 'none';
     document.getElementsByClassName('hand-image')[0].style.transition = 'none';
 
-    document.getElementsByClassName('cube')[0].style.transition = '';
-    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
-
 
   });
 
@@ -185,8 +182,6 @@ function Viewport(data) {
      document.getElementsByClassName('hand-image')[0].style.display = 'none';
      document.getElementsByClassName('hand-image')[0].style.transition = 'none';
 
-         document.getElementsByClassName('cube')[0].style.transition = '';
-    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
 
   });
 
@@ -194,8 +189,7 @@ function Viewport(data) {
      document.getElementsByClassName('hand-image')[0].style.display = 'none';
      document.getElementsByClassName('hand-image')[0].style.transition = 'none';
 
-         document.getElementsByClassName('cube')[0].style.transition = '';
-    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
+ 
     if(e.preventDefault) { 
       e.preventDefault();
     }
@@ -212,6 +206,10 @@ function Viewport(data) {
 
   bindEvent(document, 'touchend', function(e) {
     self.down = false;
+
+        document.getElementsByClassName('cube')[0].style.transition = '';
+    document.getElementsByClassName('cube')[0].style.transition = 'ease 500ms';
+
   });  
 
   setInterval(this.animate.bind(this), this.fps);
