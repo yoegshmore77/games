@@ -137,11 +137,14 @@ function Viewport(data) {
   this.counter = 0;
   this.flag = 0;
 
+  document.getElementsByClassName('hand-image')[0].style.transition = 'linear 900ms';
+
   
 
 
   bindEvent(document, 'mousedown', function() {
     self.down = true;
+    document.getElementsByClassName('hand-image')[0].style.display = 'none';
 
 
   });
@@ -241,15 +244,27 @@ Viewport.prototype.animate = function() {
 
               this.counter++;
 
+              //document.getElementsByClassName('hand-image')[0].style.transition = 'linear 980ms';
+              
+
               if(this.counter<=80){
                 this.torqueX = this.torqueX * this.sensivityFade + (1.5 * this.speed - this.torqueX) * this.sensivity;
+                
+                document.getElementsByClassName('hand-image')[0].style.transform = 'translateX('+  this.torqueX*200 +'px)';
+                //document.getElementsByClassName('hand-image')[0].style.transform = 'rotate('+ this.torqueX *50+'deg)';
+                //console.log(document.getElementsByClassName('hand-image')[0].style);
+                //console.log( document.getElementsByClassName('hand-image')[0]);
               }else{
                 this.torqueX = this.torqueX * this.sensivityFade + (-1.5 * this.speed - this.torqueX) * this.sensivity;
+                document.getElementsByClassName('hand-image')[0].style.transform = 'translateX('+  this.torqueX*200 +'px)';
+                //document.getElementsByClassName('hand-image')[0].style.transform = 'rotate('+ this.torqueX*50 +'deg)';
               }
               if(this.counter>=160){
                 this.counter =0;
               }
         }else{
+
+
 
           this.element.style[userPrefix.js + 'Transition'] = '';
           this.element.style[userPrefix.js + 'Transition'] = 'ease 500ms';
@@ -376,6 +391,7 @@ function Cube(data) {
   });
 }
 Cube.prototype.rotateSides = function() {
+
   var viewport = this.viewport;
   if(viewport.positionY > 90 && viewport.positionY < 270) {
     this.sides[0].getElementsByClassName('cube-image')[0].style[userPrefix.js + 'Transform'] = 'rotate(' + (viewport.positionX + viewport.torqueX) + 'deg)';
