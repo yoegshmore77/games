@@ -115,7 +115,7 @@ function Viewport(data) {
   this.mouseY = 0;
   this.distanceX = 0;
   this.distanceY = 0;
-  this.positionX = 0;//40;//1122;
+  this.positionX = 40;//40;//1122;
   this.positionY = 0;//136;
   this.torqueX = 0;
   this.torqueY = 0;
@@ -152,6 +152,7 @@ function Viewport(data) {
   bindEvent(document, 'mouseup', function() {
     self.down = false;
     document.getElementsByClassName('hand-image')[0].style.display = 'none';
+    document.getElementsByClassName('hand-image')[0].style.transition = 'none';
   });
   
   bindEvent(document, 'keyup', function() {
@@ -161,7 +162,7 @@ function Viewport(data) {
   bindEvent(document, 'mousemove', function(e) {
     self.mouseX = e.pageX;
     self.mouseY = e.pageY;
-    document.getElementsByClassName('hand-image')[0].style.display = 'none';
+    //document.getElementsByClassName('hand-image')[0].style.display = 'none';
   });
 
   bindEvent(document, 'touchstart', function(e) {
@@ -172,9 +173,13 @@ function Viewport(data) {
     self.mouseY = e.pageY / self.touchSensivity;
     self.lastX  = self.mouseX;
     self.lastY  = self.mouseY;
+
+     document.getElementsByClassName('hand-image')[0].style.display = 'none';
+
   });
 
   bindEvent(document, 'touchmove', function(e) {
+     document.getElementsByClassName('hand-image')[0].style.display = 'none';
     if(e.preventDefault) { 
       e.preventDefault();
     }
@@ -266,7 +271,7 @@ Viewport.prototype.animate = function() {
               }
         }else{
 
-          document.getElementsByClassName('hand-image')[0].style.display = 'none';
+          //document.getElementsByClassName('hand-image')[0].style.display = 'none';
 
 
 
