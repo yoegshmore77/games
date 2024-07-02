@@ -266,6 +266,8 @@ Viewport.prototype.animate = function() {
               }
         }else{
 
+          document.getElementsByClassName('hand-image')[0].style.display = 'none';
+
 
 
           this.element.style[userPrefix.js + 'Transition'] = '';
